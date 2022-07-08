@@ -1,32 +1,29 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <title>{{ config('app.name') }} - Login</title>
+         <!-- CSRF Token -->
+        <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+         <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+         <!-- Fonts -->
+        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="bg-primary">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+        @yield('main-content')
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
-
-    <!-- Favicon -->
-    <link href="{{ asset('img/favicon.png') }}" rel="icon" type="image/png">
-</head>
-<body class="bg-gradient-primary min-vh-100 d-flex justify-content-center align-items-center">
-
-@yield('main-content')
-
-<!-- Scripts -->
-<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
-</body>
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/scripts.js') }}"></script>
+    </body>
 </html>

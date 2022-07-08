@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +15,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (!Auth::check()) {
+        return redirect('/login');
+    } else {
+        return redirect('/dashboard');
+    }
 });
 
 Auth::routes();
+Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/callsdatatables', 'CallsReportController@callsDatatables')->name('callsdatatables');
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Auth::routes(['register' => false]);
+
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::get('/calls-report', 'CallsReportController@index')->name('calls-report');
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::put('/profile', 'ProfileController@update')->name('profile.update');
