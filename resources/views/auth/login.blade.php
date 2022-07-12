@@ -17,7 +17,6 @@
                             <div class="card-body">
                                 @if ($errors->any())
                                 <div class="alert alert-danger alert-icon" role="alert">
-                                    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                                     <div class="alert-icon-aside">
                                         <i class="fa-solid fa-triangle-exclamation"></i>
                                     </div>
@@ -35,8 +34,8 @@
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <!-- Form Group (email address)-->
                                     <div class="mb-3">
-                                        <label class="small mb-1" for="login">Your Email or Office ID</label>
-                                        <input class="form-control @error('login') is-invalid @enderror" id="login" name="login" value="{{ old('login') }}" placeholder="{{ __('E-Mail Address or Office ID') }}" required autofocus />
+                                        <label class="small mb-1" for="email">Your Email</label>
+                                        <input class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" placeholder="{{ __('E-Mail Address') }}" required autofocus />
                                     </div>
                                     <!-- Form Group (password)-->
                                     <div class="mb-3">

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 
 class CallsReportController extends Controller

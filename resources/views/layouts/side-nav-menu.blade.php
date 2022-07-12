@@ -3,7 +3,6 @@
     <div class="sidenav-footer">
         <div class="sidenav-footer-content">
             <div class="sidenav-footer-title">{{ _('Welcome') }} : {{ Auth::user()->name }}</div>
-            <div class="sidenav-footer-title">{{ _('office ID') }} : {{ Auth::user()->username }}</div>
         </div>
     </div>
 
