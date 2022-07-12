@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class FtdUserProvider implements  UserProvider
 {
     public function retrieveById($identifier){
-        $result = DB::connection('pgsql')->select("select * from users where id = :id", [':id' => $identifier]);
+        $result = DB::select("select * from users where id = :id", [':id' => $identifier]);
         return !empty($result[0]) ? new ftdUser((array) $result[0]) : null;
     }
 
@@ -24,7 +24,7 @@ class FtdUserProvider implements  UserProvider
     }
 
     public function retrieveByCredentials(array $credentials){
-        $result = DB::connection('pgsql')->select("select * from users where email = :email", [':email' => $credentials['email']]);
+        $result = DB::select("select * from users where email = :email", [':email' => $credentials['email']]);
         return !empty($result[0]) ? new ftdUser((array) $result[0]) : null;
     }
 
