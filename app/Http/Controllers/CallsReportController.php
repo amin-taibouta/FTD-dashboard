@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\DB;
 
 class CallsReportController extends Controller
 {
@@ -41,6 +42,7 @@ class CallsReportController extends Controller
      */
     public function callsDatatables()
     {
-        return Datatables::of(User::query())->make(true);
+		$result = DB::select( DB::raw("SET NOCOUNT ON; exec dbo.DTP_CallsList @start = '2022-07-06', @end = '2022-07-12' "));
+		return Datatables::of($result)->make(true);
     }
 }

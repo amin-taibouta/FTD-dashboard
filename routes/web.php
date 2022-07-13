@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,27 @@ use Illuminate\Support\Facades\DB;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/users', function () {
+	/*EXEC dbo.DTP_CallsList
+	@user_id = 1,
+	@offices = NULL,
+	@orgs = NULL,
+	@start = '2022-07-06',
+	@end = '2022-07-12'*/
+	//dd(DB::select( DB::raw("SET NOCOUNT ON; exec dbo.DTP_CallsList @start = '2022-07-06', @end = '2022-07-12' ")));
+
+	/*DB::raw("SET NOCOUNT ON; exec dbo.DTP_Users_InsertUser @name = :name, @last_name = :lastName, @email = :email, @username = :username, @password = :password "), 
+		[
+			':email' => 'woody@futuredontics.com',
+			':password' => Hash::make('woody'),
+			':name' => 'Woody',
+			':lastName' => 'Woodard',
+			':username' => 'woody.woodard'
+		]
+	);*/
+	dd(DB::select( DB::raw("SET NOCOUNT ON; exec dbo.DTP_Users_SelectUser")));
+});
 
 Route::get('/', function () {
     if (!Auth::check()) {

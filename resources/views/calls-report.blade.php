@@ -37,17 +37,17 @@
                     <table id="users-table">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Created At</th>
-                                <th>Updated At</th>
+                                <th>Date / time</th>
+                                <th>Caller ID</th>
+                                <th>Duration</th>
+                                <th>Recording</th>
                                 <th>Status</th>
                                 <th>Actions</th>
-                            </tr>
+							</tr>
                         </thead>
                     </table>
                 </div>
+
                 <script>
                 $(function() {
                     $('#users-table').DataTable({
@@ -55,28 +55,25 @@
                         serverSide: true,
                         ajax: '{!! route('callsdatatables') !!}',
                         columns: [
-                            { data: 'id', name: 'id' },
-                            { data: 'name', name: 'name' },
-                            { data: 'email', name: 'email' },
-                            { data: 'created_at', name: 'created_at' },
-                            { data: 'updated_at', name: 'updated_at' },
+                            { data: 'call_date', name: 'call_date' },
+                            { data: 'caller_id', name: 'caller_id' },
+                            { data: 'call_length', name: 'call_length' },
+                            { data: 'recording_url', name: 'recording_url' },
                             { 
-                                data: '',
-                                name: '',
+                                data: 'converted',
+                                name: 'converted',
                                 render : function(data, type, full, meta) {
-
-                                    if (full.email == "amin.taibouta8@gmail.com") {
-                                        return '<div class="badge bg-warning rounded-pill">Disputed</div>';
+                                    if (data == "Yes") {
+										return '<div class="badge bg-info rounded-pill">Converted</div>';  
+                                        //return '<div class="badge bg-warning rounded-pill">Disputed</div>';
                                     }
-                                    if (full.email == "amin.taibouta6@gmail.com") {
+                                    /*if (full.email == "amin.taibouta6@gmail.com") {
                                         return '<div class="badge bg-danger rounded-pill">Rejected</div>';
                                     }
                                     if (full.email == "amin.taibouta1@gmail.com") {
                                         return '<div class="badge bg-secondary text-white rounded-pill">Approved</div>';
-                                    }
-                                    
-                                    return '<div class="badge bg-info rounded-pill">Converted</div>';                     
-                                }
+                                    }*/
+								}	
                             },
                             { 
                                 data: '',
