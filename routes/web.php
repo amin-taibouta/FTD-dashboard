@@ -34,7 +34,7 @@ Route::get('/users', function () {
 			':username' => 'woody.woodard'
 		]
 	);*/
-	dd(DB::select( DB::raw("SET NOCOUNT ON; exec dbo.DTP_Users_SelectUser")));
+	//dd(DB::select( DB::raw("SET NOCOUNT ON; exec dbo.DTP_Users_SelectUser")));
 });
 
 Route::get('/', function () {
