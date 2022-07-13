@@ -30,7 +30,6 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Auth::provider('ftd', function ($app, array $config) {
-            // Return an instance of Illuminate\Contracts\Auth\UserProvider...
             return new FtdUserProvider();
         });
     }
