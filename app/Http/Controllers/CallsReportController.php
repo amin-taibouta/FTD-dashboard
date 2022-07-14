@@ -42,7 +42,7 @@ class CallsReportController extends Controller
      */
     public function callsDatatables()
     {
-		$result = DB::select( DB::raw("SET NOCOUNT ON; exec dbo.DTP_CallsList @start = '2022-07-06', @end = '2022-07-12' "));
+		$result = DB::select( DB::raw("SET NOCOUNT ON; exec dbo.DTP_CallsList  @start = '2022-07-06', @end = '2022-07-18' "));
 		return Datatables::of($result)->make(true);
     }
 }
