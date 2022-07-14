@@ -15,6 +15,17 @@ use Illuminate\Support\Facades\Hash;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/fix-users', function () {
+    $users = DB::select( DB::raw("SET NOCOUNT ON; exec dbo.DTP_Users_SelectUser"));
+    foreach($users as $user)  {
+        DB::raw("SET NOCOUNT ON; exec dbo.DTP_Users_UpdateUser", 
+            [
+                'id' => $user->id,
+                'offices' => "99999,88888"
+            ]
+        );
+    }
+});
 
 Route::get('/users', function () {
 	/*EXEC dbo.DTP_CallsList
