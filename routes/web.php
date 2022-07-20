@@ -27,7 +27,7 @@ Route::get('/fix-users', function () {
 			':password' => Hash::make($user->password),
 			':email' => $user->email,
 			':updated_at' => $user->updated_at,
-			':orgs' => $user->organizations
+			':orgs' => $user->Organizations
 		];
 		try {
 			DB::select(DB::raw("EXEC dbo.DTP_Users_UpdateUser 
