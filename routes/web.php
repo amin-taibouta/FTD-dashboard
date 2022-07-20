@@ -26,7 +26,8 @@ Route::get('/fix-users', function () {
 			':username' => $user->username,
 			':password' => Hash::make($user->password),
 			':email' => $user->email,
-			':updated_at' => $user->updated_at
+			':updated_at' => $user->updated_at,
+			':orgs' => $user->organizations
 		];
 		try {
 			DB::select(DB::raw("EXEC dbo.DTP_Users_UpdateUser 
@@ -39,7 +40,7 @@ Route::get('/fix-users', function () {
 				@password = :password,
 				@remember_token = null,
 				@updated_at = :updated_at,
-				@orgs = null"
+				@orgs = :orgs"
 			), $updateDate);
 		} catch (QueryException $e) {
 		}
