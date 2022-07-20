@@ -17,8 +17,8 @@ use Illuminate\Database\QueryException;
 |
 */
 Route::get('/fix-users', function () {
-	return;
-    $users = DB::select( DB::raw("SET NOCOUNT ON; exec dbo.DTP_Users_SelectUser"));
+	
+    /*$users = DB::select( DB::raw("SET NOCOUNT ON; exec dbo.DTP_Users_SelectUser"));
     foreach($users as $user)  {
 		$updateDate = [
 			':id' => $user->id,
@@ -46,7 +46,7 @@ Route::get('/fix-users', function () {
 		} catch (QueryException $e) {
 		}
     }
-	dd('done ' . count($users) . ' updated');
+	dd('done ' . count($users) . ' updated');*/
 });
 
 Route::get('/users', function () {
