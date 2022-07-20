@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\QueryException;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +19,32 @@ use Illuminate\Support\Facades\Hash;
 Route::get('/fix-users', function () {
     $users = DB::select( DB::raw("SET NOCOUNT ON; exec dbo.DTP_Users_SelectUser"));
     foreach($users as $user)  {
-        DB::raw("SET NOCOUNT ON; exec dbo.DTP_Users_UpdateUser", 
-            [
-                'id' => $user->id,
-                'offices' => "99999,88888"
-            ]
-        );
+		$updateDate = [
+			':id' => $user->id,
+			':name' => $user->name,
+			':last_name' => $user->last_name,
+			':username' => $user->username,
+			':password' => Hash::make($user->password),
+			':email' => $user->email,
+			':updated_at' => $user->updated_at
+		];
+		try {
+			DB::select(DB::raw("EXEC dbo.DTP_Users_UpdateUser 
+				@id = :id, 
+				@name = :name, 
+				@last_name = :last_name, 
+				@email = :email, 
+				@username = :username,
+				@email_verified_at = null,
+				@password = :password,
+				@remember_token = null,
+				@updated_at = :updated_at,
+				@orgs = null"
+			), $updateDate);
+		} catch (QueryException $e) {
+		}
     }
+	dd('done ' . count($users) . ' updated');
 });
 
 Route::get('/users', function () {
@@ -45,7 +65,47 @@ Route::get('/users', function () {
 			':username' => 'woody.woodard'
 		]
 	);*/
-	//dd(DB::select( DB::raw("SET NOCOUNT ON; exec dbo.DTP_Users_SelectUser")));
+	
+	/*DB::select(DB::raw("EXEC dbo.DTP_Users_UpdateUser 
+				@id = 1, 
+				@name = 'Eric', 
+				@last_name = 'Ettel', 
+				@email = 'eettel@futuredontics.com', 
+				@username = 'eric.ettel',
+				@email_verified_at = null,
+				@password = 'Eric',
+				@remember_token = null,
+				@updated_at = '2022-07-13 13:04:19',
+				@orgs = null"
+			));
+
+	DB::select(DB::raw("EXEC dbo.DTP_Users_UpdateUser 
+				@id = 2, 
+				@name = 'Matt', 
+				@last_name = 'Zivkovic', 
+				@email = 'matt@futuredontics.com', 
+				@username = 'matthew.zivkovic',
+				@email_verified_at = null,
+				@password = 'Matt',
+				@remember_token = null,
+				@updated_at = '2022-07-19 13:04:19',
+				@orgs = null"
+			));
+
+	DB::select(DB::raw("EXEC dbo.DTP_Users_UpdateUser 
+				@id = 3, 
+				@name = 'Woody', 
+				@last_name = 'Woodard', 
+				@email = 'woody@futuredontics.com', 
+				@username = 'woody.woodard',
+				@email_verified_at = null,
+				@password = 'Woody',
+				@remember_token = null,
+				@updated_at = '2022-07-13 13:04:19',
+				@orgs = null"
+			));*/
+			
+	dd(DB::select( DB::raw("SET NOCOUNT ON; exec dbo.DTP_Users_SelectUser")));
 });
 
 Route::get('/', function () {
